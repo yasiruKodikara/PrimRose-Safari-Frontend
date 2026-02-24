@@ -1,0 +1,95 @@
+<div class="container mt-4 py-5">
+  <div class="page-header text-center mb-5">
+    <h1 class="display-4 fw-bold">Hotel Rooms</h1>
+    <p class="lead text-muted">Find your perfect accommodation from our curated collection</p>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-3 col-md-6" *ngFor="let room of rooms">
+      <div class="card h-100 room-card shadow-sm">
+        <!-- Image -->
+        <div class="card-img-container overflow-hidden">
+          <img [src]="room.imageUrl" alt="{{ room.name }}" class="card-img-top room-img" />
+          <div class="card-overlay">
+            <span class="badge bg-success">{{ room.price }}</span>
+          </div>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold">{{ room.type }}</h5>
+
+          <span [class.stBatchAvailable]="room.status=='available'? true : false" [class.stBatchBooked]="room.status=='booked'? true : false" class="badge mb-2">{{ room.status }}</span>
+
+          <p class="card-text text-muted small mb-2">{{ room.price_per_night }}</p>
+
+          <h3 class="card-title fw-bold mb-1"> Capacity: {{ room.capacity }}</h3>
+
+          <!-- Rating -->
+          <!-- <div class="room-rating mb-3">
+            <span class="stars">★★★★☆</span>
+            <span class="text-muted small">(94 reviews)</span>
+          </div> -->
+        </div>
+
+        <!-- Footer with Buttons -->
+        <div class="card-footer bg-white border-top">
+          <div class="d-grid gap-2">
+            <button class="btn btn-success btn-sm fw-bold" [disabled]="room.status === 'booked'? true : false" (click)="openBooking(room)" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Booking Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookingModalLabel">Book: {{ selectedRoom?.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #bookingForm="ngForm" (ngSubmit)="submitBooking(bookingForm)">
+          <div class="mb-3">
+            <label for="start_date" class="form-label">Start Date</label>
+            <input type="date" id="start_date" name="start_date" class="form-control" [(ngModel)]="booking.start_date" required #startField="ngModel" />
+            <div class="invalid-feedback d-block" *ngIf="isBookingSubmitted && startField.invalid">
+              <span *ngIf="startField.errors?.['required']">Start date is required</span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="end_date" class="form-label">End Date</label>
+            <input type="date" id="end_date" name="end_date" class="form-control" [(ngModel)]="booking.end_date" required #endField="ngModel" />
+            <div class="invalid-feedback d-block" *ngIf="isBookingSubmitted && endField.invalid">
+              <span *ngIf="endField.errors?.['required']">End date is required</span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <span class="form-label d-block">Days: {{ getBookingDays() }}</span>
+            <span class="form-label d-block">Total: {{ getBookingTotal() | number:'1.0-2' }}</span>
+          </div>
+
+          <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" id="quantity" name="quantity" class="form-control" [(ngModel)]="booking.quantity" required min="1" #qtyField="ngModel" />
+            <div class="invalid-feedback d-block" *ngIf="isBookingSubmitted && qtyField.invalid">
+              <span *ngIf="qtyField.errors?.['required']">Quantity is required</span>
+              <span *ngIf="qtyField.errors?.['min']">Quantity must be at least 1</span>
+            </div>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Confirm Booking</button>
+            <button type="submit" class="btn btn-success mt-2">Save and Shop More</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

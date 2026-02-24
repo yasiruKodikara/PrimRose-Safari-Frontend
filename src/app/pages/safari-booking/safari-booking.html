@@ -1,0 +1,23 @@
+<!-- Safari Booking Page Component Template -->
+<div class="safari-container">
+  <div class="header-section">
+    <h1 class="title">Safari Jeep Booking</h1>
+    <p class="subtitle">Choose your preferred safari jeep and start your adventure</p>
+  </div>
+
+  <div class="jeep-list">
+    <div class="jeep-card" *ngFor="let jeep of safariJeeps">
+      <h2 class="jeep-name">{{ jeep.name }}</h2>
+
+      <div class="details">
+        <p><strong>Price per Trip:</strong> LKR {{ jeep.price_per_trip }}</p>
+        <p><strong>Max Passengers:</strong> {{ jeep.max_passengers }}</p>
+        <p><strong>Driver Included:</strong> {{ jeep.driver_included ? 'Yes' : 'No' }}</p>
+        <p><strong>Status:</strong> <span class="status" [class.available]="jeep.status === 'available'">{{ jeep.status }}</span></p>
+      </div>
+
+      <button class="book-btn" [disabled]="jeep.status !== 'available'">Book Now</button>
+    </div>
+  </div>
+</div>
+

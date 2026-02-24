@@ -1,0 +1,79 @@
+
+<main class="home-main align-items-center d-flex-column">
+    <div class="secone">
+      <button class="location"><img src="https://res.cloudinary.com/doawbwzbs/image/upload/v1764539036/Image-Source-PlusPNG.com_efsqxw.png" alt="" class="licon">
+        Udawalawa, Sri Lanka
+      </button>
+      <div class="heading">
+        <h1 class="h1heading">Discover Your Dream <br> Destination</h1>
+        <p class="h1para">Explore the world's most beautiful places with us. Your adventure starts here.</p>
+
+      </div>
+      <img src="https://res.cloudinary.com/doawbwzbs/image/upload/v1764533013/Untitled-2_rpm0eo.png" alt="" style="width: auto; height: 5rem; margin-top: 2rem; display: flex; position: fixed; bottom: 2rem; right: 2rem;">
+      <img src="https://res.cloudinary.com/doawbwzbs/image/upload/v1764487623/scroll-bar_f7z9vu.png" alt="" style="width: auto; height: 4rem; margin-top: 2rem; display: flex; justify-self: center; margin-top: 9rem;" class="float-up-down">
+    </div>
+    <div class="sectwo">
+      <h1 class="section-title">Our Packages</h1>
+
+      <div class="card mb-3" style="max-width: 60%;display: flex; margin-left: 2rem;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="https://res.cloudinary.com/doawbwzbs/image/upload/v1764449100/WhatsApp_Image_2025-11-29_at_3.46.29_PM_uj6two.jpg" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2 class="card-title">Safari</h2>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              <button class="sbutton" [routerLink]="['/safaris']">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3" style="max-width: 60%; display: flex; margin-left: auto; margin-right: 2rem;">
+        <div class="row g-0">
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2 class="card-title">Car</h2>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              <button class="sbutton" [routerLink]="['/vehicles']">View</button>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <img src="https://res.cloudinary.com/doawbwzbs/image/upload/v1764449100/WhatsApp_Image_2025-11-29_at_3.46.29_PM_uj6two.jpg" class="img-fluid rounded-end" alt="...">
+          </div>
+        </div>
+      </div>
+      
+      <div class="card mb-3" style="max-width: 60%;display: flex; margin-left: 2rem;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="https://res.cloudinary.com/doawbwzbs/image/upload/v1764449100/WhatsApp_Image_2025-11-29_at_3.46.29_PM_uj6two.jpg" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2 class="card-title">Room</h2>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              <button class="sbutton" [routerLink]="['/rooms']">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+
+    <div class="sectionthree">
+      <h1 style="display: flex; justify-content: right; font-size: 4rem; color: rgb(0, 252, 76); margin-right: 6rem;">Gallery</h1>
+
+      <div class="gallery animated-gallery" [class.expanded]="isExpanded">
+        <img *ngFor="let img of images" [src]="img" alt="Gallery image"/>
+      </div>
+
+
+
+    </div>
+
+</main>
+

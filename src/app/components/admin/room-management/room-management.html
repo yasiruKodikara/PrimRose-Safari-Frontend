@@ -1,0 +1,95 @@
+<div class="management-section">
+  <div class="section-header d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold">Room Management</h3>
+    <button class="btn btn-primary btn-sm" (click)="showForm = !showForm" *ngIf="!showForm">+ Add Room</button>
+  </div>
+
+  <!-- Add/Edit Form -->
+  <div class="card p-4 mb-4" *ngIf="showForm">
+    <form #roomForm="ngForm" (ngSubmit)="addRoom(roomForm)">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Room Number</label>
+          <input type="text" name="room_number" class="form-control" [(ngModel)]="newRoom.room_number" required #roomNumField="ngModel" [class.is-invalid]="isSubmitted && roomNumField.invalid" />
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && roomNumField.invalid">Room number is required</div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Type</label>
+          <select name="type" class="form-control" [(ngModel)]="newRoom.type" required #typeField="ngModel" [class.is-invalid]="isSubmitted && typeField.invalid">
+            <option value="Single">Single</option>
+            <option value="Double">Double</option>
+            <option value="Suite">Suite</option>
+            <option value="Deluxe">Deluxe</option>
+          </select>
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && typeField.invalid">Type is required</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Price Per Night ($)</label>
+          <input type="number" name="price_per_night" class="form-control" [(ngModel)]="newRoom.price_per_night" required min="0" #priceField="ngModel" [class.is-invalid]="isSubmitted && priceField.invalid" />
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && priceField.invalid">Valid price is required</div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Capacity</label>
+          <input type="number" name="capacity" class="form-control" [(ngModel)]="newRoom.capacity" required min="1" #capacityField="ngModel" [class.is-invalid]="isSubmitted && capacityField.invalid" />
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && capacityField.invalid">Valid capacity is required</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Status</label>
+          <select name="status" class="form-control" [(ngModel)]="newRoom.status" required #statusField="ngModel" [class.is-invalid]="isSubmitted && statusField.invalid">
+            <option value="available">Available</option>
+            <option value="booked">booked</option>
+          </select>
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && statusField.invalid">Status is required</div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Image URL</label>
+          <input type="url" name="imageUrl" class="form-control" [(ngModel)]="newRoom.imageUrl" required #imageField="ngModel" [class.is-invalid]="isSubmitted && imageField.invalid" />
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && imageField.invalid">Valid image URL is required</div>
+        </div>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-success">{{ editingId ? 'Update' : 'Add' }} Room</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Rooms Table -->
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Room Number</th>
+          <th>Type</th>
+          <th>Price/Night</th>
+          <th>Capacity</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let room of rooms">
+          <td>{{ room.room_number }}</td>
+          <td>{{ room.type }}</td>
+          <td>${{ room.price_per_night }}</td>
+          <td>{{ room.capacity }} {{ room.capacity === 1 ? 'Guest' : 'Guests' }}</td>
+          <td><span [ngClass]="room.status === 'available' ? 'badge bg-success' : 'badge bg-danger'">{{ room.status }}</span></td>
+          <td>
+            <button class="btn btn-sm btn-primary me-2" (click)="editRoom(room)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteRoom(room.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

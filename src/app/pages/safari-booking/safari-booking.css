@@ -1,0 +1,84 @@
+  .safari-container {
+    padding: 2rem 4rem;
+  }
+
+  .header-section {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #0a8f2a;
+  }
+
+  .subtitle {
+    font-size: 1.4rem;
+    opacity: 0.8;
+  }
+
+  .jeep-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .jeep-card {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 128, 0, 0.2);
+    border-left: 8px solid #0a8f2a;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .jeep-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 128, 0, 0.3);
+  }
+
+  .jeep-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #08751f;
+    margin-bottom: 1rem;
+  }
+
+  .details p {
+    margin: 4px 0;
+    font-size: 1rem;
+  }
+
+  .status {
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  .status.available {
+    background: #d2ffd9;
+    color: #0a8f2a;
+  }
+
+  .book-btn {
+    margin-top: 1.2rem;
+    width: 100%;
+    background: #0a8f2a;
+    border: none;
+    color: white;
+    padding: 0.8rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .book-btn:disabled {
+    background: gray;
+    cursor: not-allowed;
+  }
+
+  .book-btn:not(:disabled):hover {
+    background: #0ec93b;
+  }

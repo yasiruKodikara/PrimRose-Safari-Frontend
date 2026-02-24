@@ -1,0 +1,89 @@
+<div class="container py-5">
+  <div class="page-header text-center mb-5">
+    <h1 class="display-4 fw-bold">Safari Tours</h1>
+    <p class="lead text-muted">Discover the wild side of nature with our exclusive safari packages</p>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-3 col-md-6" *ngFor="let safari of safaris">
+      <div class="card h-100 safari-card shadow-sm">
+        <!-- Image -->
+        <div class="card-img-container overflow-hidden">
+          <img [src]="safari.image" alt="{{ safari.name }}" class="card-img-top safari-img" />
+          <div class="card-overlay">
+            <span class="badge bg-primary">{{ safari.price }}</span>
+          </div>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold">{{ safari.name }}</h5>
+          <p class="card-text text-muted small flex-grow-1">{{ safari.description }}</p>
+
+          <!-- Rating -->
+          <!-- <div class="safari-rating mb-3">
+            <span class="stars">★★★★★</span>
+            <span class="text-muted small">(128 reviews)</span>
+          </div> -->
+        </div>
+
+        <!-- Footer with Buttons -->
+        <div class="card-footer bg-white border-top">
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary btn-sm fw-bold" (click)="openBooking(safari)" data-bs-toggle="modal" data-bs-target="#safariBookingModal">Book Now</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Booking Modal for Safari -->
+<div class="modal fade" id="safariBookingModal" tabindex="-1" aria-labelledby="safariBookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="safariBookingModalLabel">Book: {{ selectedSafari?.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #bookingForm="ngForm" (ngSubmit)="submitBooking(bookingForm)">
+          <div class="mb-3">
+            <label for="s_start_date" class="form-label">Start Date</label>
+            <input type="date" id="s_start_date" name="start_date" class="form-control" [(ngModel)]="booking.start_date" required #startField="ngModel" />
+            <div class="invalid-feedback d-block" *ngIf="isBookingSubmitted && startField.invalid">
+              <span *ngIf="startField.errors?.['required']">Start date is required</span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="s_end_date" class="form-label">End Date</label>
+            <input type="date" id="s_end_date" name="end_date" class="form-control" [(ngModel)]="booking.end_date" required #endField="ngModel" />
+            <div class="invalid-feedback d-block" *ngIf="isBookingSubmitted && endField.invalid">
+              <span *ngIf="endField.errors?.['required']">End date is required</span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <span class="form-label d-block">Days: {{ getBookingDays() }}</span>
+            <span class="form-label d-block">Total: {{ getBookingTotal() | number:'1.0-2' }}</span>
+          </div>
+
+          <div class="mb-3">
+            <label for="s_quantity" class="form-label">Quantity</label>
+            <input type="number" id="s_quantity" name="quantity" class="form-control" [(ngModel)]="booking.quantity" required min="1" #qtyField="ngModel" />
+            <div class="invalid-feedback d-block" *ngIf="isBookingSubmitted && qtyField.invalid">
+              <span *ngIf="qtyField.errors?.['required']">Quantity is required</span>
+              <span *ngIf="qtyField.errors?.['min']">Quantity must be at least 1</span>
+            </div>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Confirm Booking</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

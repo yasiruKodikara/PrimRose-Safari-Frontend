@@ -1,0 +1,54 @@
+<div class="admin-container">
+  <div class="admin-header">
+    <h1 style="margin-top: 60px;">Admin Dashboard</h1>
+    <p class="text">Manage vehicles, rooms, and safaris</p>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs-wrapper">
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <button class="nav-link" [ngClass]="{'active': activeTab === 'vehicles'}" (click)="setActiveTab('vehicles')" role="tab">
+          <i class="icon">🚗</i> Vehicles
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" [ngClass]="{'active': activeTab === 'rooms'}" (click)="setActiveTab('rooms')" role="tab">
+          <i class="icon">🏨</i> Rooms
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" [ngClass]="{'active': activeTab === 'safaris'}" (click)="setActiveTab('safaris')" role="tab">
+          <i class="icon">🦁</i> Safaris
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link btn btn-danger" (click)="onLogout()">
+          <i class="icon">🔒</i> Logout
+        </button>
+      </li>
+      
+      
+    </ul>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-content">
+    @if (activeTab === 'vehicles') {
+      <div class="tab-pane active">
+        <app-vehicle-management></app-vehicle-management>
+      </div>
+    }
+    @if (activeTab === 'rooms') {
+      <div class="tab-pane active">
+        <app-room-management></app-room-management>
+      </div>
+    }
+    @if (activeTab === 'safaris') {
+      <div class="tab-pane active">
+        <app-safari-management></app-safari-management>
+      </div>
+    }
+  </div>
+</div>
+

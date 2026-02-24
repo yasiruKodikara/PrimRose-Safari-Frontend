@@ -1,0 +1,95 @@
+<div class="management-section">
+  <div class="section-header d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold">Safari Management</h3>
+    <button class="btn btn-primary btn-sm" (click)="showForm = !showForm" *ngIf="!showForm">+ Add Safari</button>
+  </div>
+
+  <!-- Add/Edit Form -->
+  <div class="card p-4 mb-4" *ngIf="showForm">
+    <form #safariForm="ngForm" (ngSubmit)="addSafari(safariForm)">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Safari Name</label>
+          <input type="text" name="name" class="form-control" [(ngModel)]="newSafari.name" required #nameField="ngModel" [class.is-invalid]="isSubmitted && nameField.invalid" />
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && nameField.invalid">Safari name is required</div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Price Per Trip ($)</label>
+          <input type="number" name="price_per_trip" class="form-control" [(ngModel)]="newSafari.price_per_trip" required min="0" #priceField="ngModel" [class.is-invalid]="isSubmitted && priceField.invalid" />
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && priceField.invalid">Valid price is required</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Max Passengers</label>
+          <input type="number" name="max_passengers" class="form-control" [(ngModel)]="newSafari.max_passengers" required min="1" #passengersField="ngModel" [class.is-invalid]="isSubmitted && passengersField.invalid" />
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && passengersField.invalid">Valid passenger count is required</div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Status</label>
+          <select name="status" class="form-control" [(ngModel)]="newSafari.status" required #statusField="ngModel" [class.is-invalid]="isSubmitted && statusField.invalid">
+            <option value="available">Available</option>
+            <option value="unavailable">Unavailable</option>
+          </select>
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && statusField.invalid">Status is required</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Image URL</label>
+        <input type="url" name="imageUrl" class="form-control" [(ngModel)]="newSafari.imageUrl" required #imageField="ngModel" [class.is-invalid]="isSubmitted && imageField.invalid" />
+        <div class="invalid-feedback d-block" *ngIf="isSubmitted && imageField.invalid">Valid image URL is required</div>
+      </div>
+
+      <div class="mb-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="driver_included" [(ngModel)]="newSafari.driver_included" id="driverCheck" />
+          <label class="form-check-label" for="driverCheck">
+            Driver Included
+          </label>
+        </div>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-success">{{ editingId ? 'Update' : 'Add' }} Safari</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Safaris Table -->
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Name</th>
+          <th>Price/Trip</th>
+          <th>Max Passengers</th>
+          <th>Driver Included</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let safari of safaris">
+          <td>{{ safari.name }}</td>
+          <td>${{ safari.price_per_trip }}</td>
+          <td>{{ safari.max_passengers }}</td>
+          <td>
+            <span class="badge" [ngClass]="safari.driver_included ? 'bg-success' : 'bg-warning'">
+              {{ safari.driver_included ? 'Yes' : 'No' }}
+            </span>
+          </td>
+          <td><span [ngClass]="safari.status === 'available' ? 'badge bg-success' : 'badge bg-danger'">{{ safari.status }}</span></td>
+          <td>
+            <button class="btn btn-sm btn-primary me-2" (click)="editSafari(safari)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteSafari(safari.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

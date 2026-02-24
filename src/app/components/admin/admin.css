@@ -1,0 +1,121 @@
+.admin-container {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.admin-header {
+  background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.admin-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.admin-header .text-muted {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.nav-tabs-wrapper {
+  background-color: white;
+  border-bottom: 2px solid #dee2e6;
+  padding: 0 20px;
+  position: sticky;
+  top: 70px;
+  z-index: 100;
+}
+
+.nav-tabs {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: none;
+}
+
+.nav-item {
+  margin: 0;
+}
+
+.nav-link {
+  background-color: transparent;
+  border: none;
+  color: #6c757d;
+  font-weight: 600;
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+}
+
+.nav-link:hover {
+  color: #0d6efd;
+  background-color: #f8f9fa;
+}
+
+.nav-link.active {
+  color: #0d6efd;
+  border-bottom-color: #0d6efd;
+}
+
+.nav-link .icon {
+  font-size: 1.3rem;
+}
+
+.tab-content {
+  padding: 30px 20px;
+  background-color: white;
+}
+
+.tab-pane {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .admin-header {
+    padding: 30px 15px;
+  }
+
+  .nav-tabs-wrapper {
+    padding: 0 10px;
+    top: 60px;
+  }
+
+  .nav-link {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+
+  .nav-link .icon {
+    font-size: 1.1rem;
+  }
+
+  .tab-content {
+    padding: 20px 10px;
+  }
+}

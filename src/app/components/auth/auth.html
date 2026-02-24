@@ -1,0 +1,70 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <!-- Header -->
+    <div class="auth-header">
+      <h2 class="auth-title">Welcome to PrimRose</h2>
+      <p class="auth-subtitle">Sign in to continue your journey</p>
+    </div>
+
+    <!-- Login: Phone + Password -->
+    <div class="auth-form-wrapper">
+      <form #loginForm="ngForm" (ngSubmit)="submitLogin()" class="auth-form">
+        <div class="mb-3">
+          <label for="phoneNumber" class="form-label">Phone Number</label>
+          <input
+            type="tel"
+            class="form-control form-control-lg"
+            id="phoneNumber"
+            name="phoneNumber"
+            placeholder="+94712345678"
+            [(ngModel)]="phoneNumber"
+            maxlength="12"
+            required
+            pattern="[0-9\s\-\+\(\)]{10,15}"
+            #phoneField="ngModel"
+            [class.is-invalid]="isSubmitted && phoneField.invalid"
+          />
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && phoneField.invalid">
+            <span *ngIf="phoneField.errors?.['required']">Phone number is required</span>
+            <span *ngIf="phoneField.errors?.['pattern']">Please enter a valid phone number (10-15 digits)</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control form-control-lg"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            [(ngModel)]="password"
+            required
+            minlength="6"
+            #passField="ngModel"
+            [class.is-invalid]="isSubmitted && passField.invalid"
+          />
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && passField.invalid">
+            <span *ngIf="passField.errors?.['required']">Password is required</span>
+            <span *ngIf="passField.errors?.['minlength']">Password must be at least 6 characters</span>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <a class="small text-primary" href="/forgot-password">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg w-100 auth-submit-btn">
+          Sign In
+        </button>
+
+        <p class="auth-footer-text">
+          New to PrimRose? <a [routerLink]="['/register']" class="text-primary fw-bold">Create an account</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Background decoration -->
+  <div class="auth-decoration"></div>
+</div>
