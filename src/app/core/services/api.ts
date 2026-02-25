@@ -120,7 +120,7 @@ export class Api {
   //roomBooking
   bookRoom(bookingData:any):Observable<any>{
     
-    return this.http.post(`${this.baseUrl}/book-room`, bookingData);
+    return this.http.post(`${this.baseUrl}/bookings/room`, bookingData);
   }
 
   //safariBooking

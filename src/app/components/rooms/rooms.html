@@ -19,7 +19,7 @@
         <div class="card-body d-flex flex-column">
           <h5 class="card-title fw-bold">{{ room.type }}</h5>
 
-          <span [class.stBatchAvailable]="room.status=='available'? true : false" [class.stBatchBooked]="room.status=='booked'? true : false" class="badge mb-2">{{ room.status }}</span>
+          <span class="badge mb-2">{{ room.status }}</span>
 
           <p class="card-text text-muted small mb-2">{{ room.price_per_night }}</p>
 
@@ -35,7 +35,7 @@
         <!-- Footer with Buttons -->
         <div class="card-footer bg-white border-top">
           <div class="d-grid gap-2">
-            <button class="btn btn-success btn-sm fw-bold" [disabled]="room.status === 'booked'? true : false" (click)="openBooking(room)" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+            <button class="btn btn-success btn-sm fw-bold"  (click)="openBooking(room)" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
             
           </div>
         </div>
