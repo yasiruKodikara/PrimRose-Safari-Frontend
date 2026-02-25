@@ -18,7 +18,7 @@ export class Safari {
   constructor(private api:Api){
 
   }
-  safaris = [];
+  safaris:any = [];
   // Booking state
   selectedSafari: any = null;
   booking: { start_date: string; end_date: string; quantity: number } = { start_date: '', end_date: '', quantity: 1 };
