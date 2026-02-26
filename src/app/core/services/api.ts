@@ -118,6 +118,7 @@ export class Api {
   }
 
   //roomBooking
+  //Tested ✅
   bookRoom(bookingData:any):Observable<any>{
     
     return this.http.post(`${this.baseUrl}/bookings/room`, bookingData);

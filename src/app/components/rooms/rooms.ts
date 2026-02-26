@@ -40,6 +40,7 @@ export class Rooms {
     this.isBookingSubmitted = true;
     if (form.valid) {
       const user_id = this.authState.currentUserValue?.id;
+      
       const bookingData = {
         user_id: user_id,
         room_id: this.selectedRoom.id,
@@ -52,6 +53,7 @@ export class Rooms {
         console.log('Booking successful:', response);
         this.isBooked = true;
       }, error => {
+        alert(error.message);
         console.error('Booking failed:', error);
       });
 

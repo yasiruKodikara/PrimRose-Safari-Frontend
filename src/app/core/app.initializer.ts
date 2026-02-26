@@ -15,6 +15,7 @@ export function initializeAuth(api: Api, authState: AuthState) {
     catchError((error) => {
       // If the cookie is missing, expired, or invalid, the server throws an error.
       // We catch it and return 'of(null)' so the app doesn't crash on load.
+      
       console.log('No valid session found. User is logged out.');
       return of(null); 
     })

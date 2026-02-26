@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthState } from '../../../core/services/auth-state';
 import { Api } from '../../../core/services/api';
 import { IDeactivateGuard } from '../../../core/guards/deactivate-guard';
-import { NgFor } from '@angular/common';
+import { DatePipe, DecimalPipe, NgClass, NgFor, TitleCasePipe, UpperCasePipe } from '@angular/common';
 
 
 interface MyAccountProps {
@@ -15,19 +15,34 @@ interface MyAccountProps {
   
 }
 
-interface Booking {
+export interface Booking {
   id: number;
-  user_id: number;
-  total_amount: number;
-  status: string;
-  created_at: string;
-  updated_at: string;
+  status: 'confirmed' | 'pending' | 'cancelled' | 'refunded'; // Using union types for better type safety
+  item_type: 'room' | 'event' | 'service'; // Specific types based on your project
+  
+  // Financials
+  total_amount: string | number; // APIs often return decimals as strings to preserve precision
+  
+  // Guest Information
+  name: string;
+  email: string;
+  phone: string;
+  
+  // Reservation Details
+  start_date: string | Date;
+  end_date: string | Date;
+  quantity: number;
+  
+  // Metadata
+  user_id?: number; // Optional if the guest is a "guest" and not a registered user
+  created_at: string | Date;
+  updated_at?: string | Date;
 }
 
 
 @Component({
   selector: 'app-my-account',
-  imports: [NgFor],
+  imports: [NgFor,DatePipe,DecimalPipe,TitleCasePipe,UpperCasePipe,NgClass],
   templateUrl: './my-account.html',
   styleUrl: './my-account.css',
 })

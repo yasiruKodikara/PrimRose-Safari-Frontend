@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VehicleManagement } from './vehicle-management/vehicle-management';
 import { RoomManagementComponent } from './room-management/room-management';
@@ -6,6 +6,7 @@ import { SafariManagementComponent } from './safari-management/safari-management
 import { AuthState } from '../../core/services/auth-state';
 import { Api } from '../../core/services/api';
 import { Router } from '@angular/router';
+import { BookingManagement } from "./booking-management/booking-management";
 
 @Component({
   selector: 'app-admin',
@@ -14,14 +15,15 @@ import { Router } from '@angular/router';
     CommonModule,
     VehicleManagement,
     RoomManagementComponent,
-    SafariManagementComponent
-  ],
+    SafariManagementComponent,
+    BookingManagement
+],
   templateUrl: './admin.html',
   styleUrl: './admin.css',
 })
 export class Admin {
   constructor(private api:Api, private router: Router, private authState: AuthState){}
-  activeTab: string = 'vehicles';
+  activeTab: string = 'bookings';
 
   setActiveTab(tab: string) {
     this.activeTab = tab;

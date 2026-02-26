@@ -23,6 +23,11 @@
         </button>
       </li>
       <li class="nav-item">
+        <button class="nav-link" [ngClass]="{'active': activeTab === 'bookings'}" (click)="setActiveTab('bookings')" role="tab">
+          <i class="icon">📆</i> Bookings
+        </button>
+      </li>
+      <li class="nav-item">
         <button class="nav-link btn btn-danger" (click)="onLogout()">
           <i class="icon">🔒</i> Logout
         </button>
@@ -47,6 +52,11 @@
     @if (activeTab === 'safaris') {
       <div class="tab-pane active">
         <app-safari-management></app-safari-management>
+      </div>
+    }
+    @if (activeTab === 'bookings') {
+      <div class="tab-pane active">
+        <app-booking-management></app-booking-management>
       </div>
     }
   </div>
