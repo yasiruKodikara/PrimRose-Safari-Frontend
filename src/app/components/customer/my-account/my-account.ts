@@ -57,6 +57,7 @@ export class MyAccount implements IDeactivateGuard, OnInit{
   boookings: Booking[] = [];
   userName:string ='';
   userRole:string ='';
+  bookingCount:number = 0;
 
   canDeactivate(): boolean {
     return confirm('Are you sure you want to leave?');
@@ -116,6 +117,16 @@ export class MyAccount implements IDeactivateGuard, OnInit{
         console.error('Failed to fetch user bookings', err);
       }
     });
+
+    this.api.getBookingCountByUser(this.authState.currentUserValue?.id || 0).subscribe({
+      next:(res)=>{
+        this.bookingCount = res[0]["count"];
+        console.log(this.bookingCount)
+      },
+      error:(err)=>{
+        console.log(err.message);
+      }
+    })
   }
 
   dashNav(){

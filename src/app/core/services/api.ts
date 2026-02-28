@@ -3,6 +3,30 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+export interface Booking {
+  id: number;
+  status: 'confirmed' | 'pending' | 'cancelled' | 'refunded'; // Using union types for better type safety
+  item_type: 'room' | 'event' | 'service'; // Specific types based on your project
+  
+  // Financials
+  total_amount: string | number; // APIs often return decimals as strings to preserve precision
+  
+  // Guest Information
+  name: string;
+  email: string;
+  phone: string;
+  
+  // Reservation Details
+  start_date: string | Date;
+  end_date: string | Date;
+  quantity: number;
+  
+  // Metadata
+  user_id?: number; // Optional if the guest is a "guest" and not a registered user
+  created_at: string | Date;
+  updated_at?: string | Date;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -125,9 +149,10 @@ export class Api {
   }
 
   //safariBooking
+  //Tested ✅
   bookSafari(bookingData:any):Observable<any>{
     
-    return this.http.post(`${this.baseUrl}/book-safari-jeep`, bookingData);
+    return this.http.post(`${this.baseUrl}/bookings/safari`, bookingData);
   }
 
   //get a user
@@ -137,7 +162,22 @@ export class Api {
   }
 
    //Tested ✅
-  getBookingsByUserId(userId:number):Observable<any>{
-    return this.http.get(`${this.baseUrl}/bookings/get-bookings-by-user/${userId}`);
+  getBookingsByUserId(userId:number):Observable<Booking[]>{
+    return this.http.get<Booking[]>(`${this.baseUrl}/bookings/get-bookings-by-user/${userId}`);
   }
+  //Tested ✅
+  getBookingCountByUser(userId:number):Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}/bookings/get-booking-count-by-user/${userId}`);
+  }
+
+  //Tested ✅
+  getBookings():Observable<Booking[]>{
+    return this.http.get<Booking[]>(`${this.baseUrl}/bookings/get-bookings`);
+    }
+
+  //DELETE a booking
+  deleteBooking(bookingId:number):Observable<any>{
+    return this.http.delete<any>(`${this.baseUrl}/bookings/delete-booking/${bookingId}`);
+  }
+
 }

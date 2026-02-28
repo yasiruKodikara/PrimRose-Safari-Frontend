@@ -1,32 +1,45 @@
 import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { Api } from '../../../core/services/api';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AsyncPipe, DatePipe, NgFor, NgIf, TitleCasePipe } from '@angular/common';
+import { AuthState } from '../../../core/services/auth-state';
+import { Booking } from '../../../core/services/api';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
-interface Booking  {
-  
-}
 
 @Component({
   selector: 'app-booking-management',
-  imports: [],
+  imports: [NgFor,NgIf,FormsModule,DatePipe,TitleCasePipe,AsyncPipe],
   templateUrl: './booking-management.html',
-  styleUrl: './booking-management.css',
+  styleUrl: './booking-management.css'
 })
 
 
 
 export class BookingManagement {
   
-  constructor(private api:Api){}
+  constructor(private api:Api,private authState:AuthState, private router:Router){}
   bookings: Booking[] = [];
+  bookings$!: Observable<Booking[]>;
+  
 
-  newRoom: Booking = {
+  newBooking: Booking = {
     id: 0,
-    room_number: '',
-    type: 'Single',
-    price_per_night: 0,
-    capacity: 1,
-    imageUrl: '',
-    status: 'available'
+    item_type: "room",
+    total_amount:0,
+    name:"",
+    email:"",
+    phone:"",
+    start_date:"",
+    end_date:"",
+    quantity:0,
+    user_id:0,
+    created_at:"",
+    updated_at:"",
+    status:"pending"
   };
 
   editingId: number | null = null;
@@ -41,17 +54,17 @@ export class BookingManagement {
     }
 
     if (this.editingId) {
-      const index = this.rooms.findIndex(r => r.id === this.editingId);
+      const index = this.bookings.findIndex(r => r.id === this.editingId);
       if (index !== -1) {
-        this.rooms[index] = { ...this.newRoom, id: this.editingId };
-        this.api.updateRoomStatus(this.newRoom.id, this.newRoom.status).subscribe((res:any)=>{
+        this.bookings[index] = { ...this.newBooking, id: this.editingId };
+        this.api.updateRoomStatus(this.newBooking.id, this.newBooking.status).subscribe((res:any)=>{
           alert(res.message);
           
         });
       }
     } else {
-      const newId = this.rooms.length > 0 ? Math.max(...this.rooms.map(r => r.id)) + 1 : 1;
-      this.api.addRoom(this.newRoom).subscribe((res:any)=>{
+      // const newId = this.newBooking.id.length > 0 ? Math.max(...this.rooms.map(r => r.id)) + 1 : 1;
+      this.api.addRoom(this.newBooking).subscribe((res:any)=>{
         alert(res.message[0]);
         
       });
@@ -61,30 +74,36 @@ export class BookingManagement {
     this.resetForm(form);
   }
 
-  editRoom(room: Room) {
-    this.newRoom = { ...room };
-    this.editingId = room.id;
+  editRoom(booking:Booking) {
+    this.newBooking = { ...booking };
+    this.editingId = booking.id;
     this.showForm = true;
     this.isSubmitted = false;
   }
 
   deleteRoom(id: number) {
-    this.api.deleteRoom(id).subscribe((res:any)=>{
-      alert(res.message[0]);
-      this.rooms = this.rooms.filter(r => r.id !== id);
+    this.api.deleteBooking(id).subscribe((res:any)=>{
+      alert(res.message);
+      this.bookings = this.bookings.filter(r => r.id !== id);
     });
   }
 
   resetForm(form: NgForm) {
     form.reset();
-    this.newRoom = {
+    this.newBooking = {
       id: 0,
-      room_number: '',
-      type: 'Single',
-      price_per_night: 0,
-      capacity: 1,
-      imageUrl: '',
-      status: 'available'
+      item_type: "room",
+      total_amount:0,
+      name:"",
+      email:"",
+      phone:"",
+      start_date:"",
+      end_date:"",
+      quantity:0,
+      user_id:0,
+      created_at:"",
+      updated_at:"",
+      status:"pending"
     };
     this.editingId = null;
     this.isSubmitted = false;
@@ -98,9 +117,22 @@ export class BookingManagement {
   }
 
   ngOnInit() {
-    this.api.getRooms().subscribe((data:any)=>{
-      this.rooms=data;
-    });
-  }
+    const userId = this.authState.currentUserValue?.id;
 
+  
+    this.bookings$ = this.api.getBookings();
+    this.api.getBookings().subscribe({
+      next: (res)=> {
+        this.bookings = res;
+        console.log(res);
+      },
+      error: (err)=>{
+        console.log(err);
+        alert(err.message);
+      }
+    });
+  
+  
+
+}
 }

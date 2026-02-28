@@ -3,6 +3,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Api } from '../../core/services/api';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthState } from '../../core/services/auth-state';
 
 declare const bootstrap: any;
 
@@ -15,7 +16,7 @@ declare const bootstrap: any;
   
 })
 export class Safari {
-  constructor(private api:Api){
+  constructor(private api:Api,private authState:AuthState){
 
   }
   safaris:any = [];
@@ -33,14 +34,29 @@ export class Safari {
   submitBooking(form: NgForm) {
     this.isBookingSubmitted = true;
     if (form.valid) {
-      console.log('Safari booking confirmed for', this.selectedSafari?.name, this.booking);
-      alert(`Booking confirmed for ${this.selectedSafari?.name} (${this.booking.quantity})`);
+
+      const user_id = this.authState.currentUserValue?.id;
+      const bookingData = {
+        user_id: user_id,
+        safari_id: this.selectedSafari.id,
+        start_date: this.booking.start_date,
+        end_date: this.booking.end_date,
+        quantity: this.booking.quantity
+      };
+      
       const modalEl = document.getElementById('safariBookingModal');
       if (modalEl) {
         const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-        this.api.bookSafari(this.booking).subscribe((res:any)=>{
+        this.api.bookSafari(bookingData).subscribe({
+          next:(res:any)=>{
           console.log(res.message);
-        })
+          alert(res.message);
+        },
+          error:(error)=>{
+            console.error(error);
+            alert(error.message);
+          }
+      })
         modal.hide();
       }
     }
