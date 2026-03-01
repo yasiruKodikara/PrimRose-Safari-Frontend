@@ -3,6 +3,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Api } from '../../core/services/api';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthState } from '../../core/services/auth-state';
 
 declare const bootstrap: any;
 
@@ -25,7 +26,7 @@ interface Vehicle{
 })
 export class Vehicles implements OnInit{
 
-  constructor(private api:Api){
+  constructor(private api:Api, private authState:AuthState){
   }
 
   vehicles: Vehicle[] = [
@@ -125,11 +126,29 @@ export class Vehicles implements OnInit{
   submitBooking(form: NgForm) {
     this.isBookingSubmitted = true;
     if (form.valid) {
-      console.log('Vehicle booking confirmed for', this.selectedVehicle?.name, this.booking);
-      alert(`Booking confirmed for ${this.selectedVehicle?.name} (${this.booking.quantity})`);
+      
+      const user_id = this.authState.currentUserValue?.id;
+      const bookingData = {
+        user_id: user_id,
+        vehicle_id: this.selectedVehicle.id,
+        start_date: this.booking.start_date,
+        end_date: this.booking.end_date,
+        quantity: this.booking.quantity
+      };
       const modalEl = document.getElementById('vehicleBookingModal');
       if (modalEl) {
         const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+
+        this.api.bookVehicle(bookingData).subscribe({
+          next:(res:any)=>{
+            console.log(res);
+            alert(res.message);
+          },
+          error:(err)=>{
+            console.log(err);
+            alert(err.message);
+          }
+        })
         modal.hide();
       }
     }

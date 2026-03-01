@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 
 
 export class BookingManagement {
+
   
   constructor(private api:Api,private authState:AuthState, private router:Router){}
   bookings: Booking[] = [];
@@ -82,10 +83,14 @@ export class BookingManagement {
   }
 
   deleteRoom(id: number) {
-    this.api.deleteBooking(id).subscribe((res:any)=>{
+    let confirmation:boolean = confirm("Are you sure?");
+    if(confirmation){
+      this.api.deleteBooking(id).subscribe((res:any)=>{
       alert(res.message);
       this.bookings = this.bookings.filter(r => r.id !== id);
     });
+  }
+    
   }
 
   resetForm(form: NgForm) {
@@ -132,7 +137,31 @@ export class BookingManagement {
       }
     });
   
-  
+   
 
 }
+
+  setStatus(bookingId:number,status:any){
+      this.api.setBookingStatus(bookingId,{status}).subscribe({
+        next:(res:any)=>{
+          console.log(res);
+          alert(res.message);
+          
+          //Refetch to update the UI
+          this.api.getBookings().subscribe({
+            next: (res)=> {
+              this.bookings = res;
+              console.log(res);
+            },
+            error: (err)=>{
+              console.log(err);
+              alert(err.message);
+            }})
+        },
+        error:(err: any)=>{
+          console.log(err);
+          alert(err);
+        }
+      })
+  }
 }

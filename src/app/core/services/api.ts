@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export interface Booking {
   id: number;
   status: 'confirmed' | 'pending' | 'cancelled' | 'refunded'; // Using union types for better type safety
-  item_type: 'room' | 'event' | 'service'; // Specific types based on your project
+  item_type: 'room' | 'safari' | 'vehicle'; // Specific types based on your project
   
   // Financials
   total_amount: string | number; // APIs often return decimals as strings to preserve precision
@@ -31,6 +31,7 @@ export interface Booking {
   providedIn: 'root',
 })
 export class Api {
+  
 
   private baseUrl = "http://localhost:3000/api";
 
@@ -155,6 +156,10 @@ export class Api {
     return this.http.post(`${this.baseUrl}/bookings/safari`, bookingData);
   }
 
+  bookVehicle(bookingData:any):Observable<any>{
+    return this.http.post(`${this.baseUrl}/bookings/vehicle`, bookingData);
+  }
+
   //get a user
    //Tested ✅
   getUser(userId:number):Observable<any>{
@@ -176,8 +181,15 @@ export class Api {
     }
 
   //DELETE a booking
+  //Tested ✅
   deleteBooking(bookingId:number):Observable<any>{
     return this.http.delete<any>(`${this.baseUrl}/bookings/delete-booking/${bookingId}`);
   }
+  
+  //UPDATE booking status
+  setBookingStatus(bookingId: number,status:any):Observable<any> {
+    return this.http.patch(`${this.baseUrl}/bookings/update-booking-status/${bookingId}`,status);
+  }
+  
 
 }

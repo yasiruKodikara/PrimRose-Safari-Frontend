@@ -66,7 +66,7 @@
 
   <!-- Rooms Table -->
   <div class="table-responsive">
-    <table class="table table-hover table-bordered table-dark">
+    <table class="table table-hover table-bordered table-dark ">
       <thead class="table-light">
         <tr>
           <th>Booking ID</th>
@@ -94,8 +94,10 @@
           <td>{{ booking.status | titlecase }}</td>
           <td>
             
-            <button class="btn btn-sm btn-danger me-2" (click)="deleteRoom(booking.id)">Reject</button>
-            <button class="btn btn-sm btn-primary me-2" (click)="editRoom(booking)">Confirm</button>
+            
+            <button class="btn btn-sm mb-2 w-100 btn-success me-2" (click)="setStatus(booking.id,'confirmed')">Confirm</button><br>
+            <button class="btn btn-sm mb-2 w-100 btn-primary me-2" (click)="setStatus(booking.id,'pending')">Pending</button><br>
+            <button class="btn btn-sm mb-2 w-100 btn-danger me-2" (click)="deleteRoom(booking.id)">Reject</button>
             
           </td>
         </tr>

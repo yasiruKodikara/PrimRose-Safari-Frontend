@@ -1,0 +1,9 @@
+table{
+    text-align: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+table td{
+    padding:20px;
+}

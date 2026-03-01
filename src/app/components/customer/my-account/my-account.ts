@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthState } from '../../../core/services/auth-state';
-import { Api } from '../../../core/services/api';
+import { Api, Booking } from '../../../core/services/api';
 import { IDeactivateGuard } from '../../../core/guards/deactivate-guard';
 import { DatePipe, DecimalPipe, NgClass, NgFor, TitleCasePipe, UpperCasePipe } from '@angular/common';
 
@@ -15,29 +15,29 @@ interface MyAccountProps {
   
 }
 
-export interface Booking {
-  id: number;
-  status: 'confirmed' | 'pending' | 'cancelled' | 'refunded'; // Using union types for better type safety
-  item_type: 'room' | 'event' | 'service'; // Specific types based on your project
+// export interface Booking {
+//   id: number;
+//   status: 'confirmed' | 'pending' | 'cancelled' | 'refunded'; // Using union types for better type safety
+//   item_type: 'room' | 'safari' | 'vehicle'; // Specific types based on your project
   
-  // Financials
-  total_amount: string | number; // APIs often return decimals as strings to preserve precision
+//   // Financials
+//   total_amount: string | number; // APIs often return decimals as strings to preserve precision
   
-  // Guest Information
-  name: string;
-  email: string;
-  phone: string;
+//   // Guest Information
+//   name: string;
+//   email: string;
+//   phone: string;
   
-  // Reservation Details
-  start_date: string | Date;
-  end_date: string | Date;
-  quantity: number;
+//   // Reservation Details
+//   start_date: string | Date;
+//   end_date: string | Date;
+//   quantity: number;
   
-  // Metadata
-  user_id?: number; // Optional if the guest is a "guest" and not a registered user
-  created_at: string | Date;
-  updated_at?: string | Date;
-}
+//   // Metadata
+//   user_id?: number; // Optional if the guest is a "guest" and not a registered user
+//   created_at: string | Date;
+//   updated_at?: string | Date;
+// }
 
 
 @Component({
