@@ -46,7 +46,7 @@ export class VehicleManagement {
         // Add new vehicle
         this.vehicles.push({ ...this.newVehicle, id: this.vehicles.length > 0 ? Math.max(...this.vehicles.map(v => v.id ?? 0)) + 1 : 1 });
         this.api.addVehicle(this.newVehicle).subscribe((res:any)=>{
-          alert(res.message); 
+          alert(res["status"]); 
         });
       }
       this.resetForm(form);

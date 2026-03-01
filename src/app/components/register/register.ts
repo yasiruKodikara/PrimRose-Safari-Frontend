@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule, NgIf } from '@angular/common';
 import { Api } from '../../core/services/api';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -19,7 +19,7 @@ export class Register {
   phone: string = '';
   isSubmitted: boolean = false;
 
-  constructor(private api:Api){}
+  constructor(private api:Api, private router:Router){}
 
   // Submit registration form
   submitRegister() {
@@ -32,9 +32,15 @@ export class Register {
     ) {
       console.log('Registering user:', { name: this.name, email: this.email, phone: this.phone });
       // TODO: Call API to register user
-      this.api.registerUser({name:this.name, email:this.email, password:this.password, phone:this.phone}).subscribe((res:any)=>{
-          alert(res.message[0]);
+      this.api.registerUser({name:this.name, email:this.email, password:this.password, phone:this.phone}).subscribe({
+        next:(res:any)=>{
+          alert(res.message);
+          this.router.navigate(['/my-account']);
+        },
+        error:(err)=>{
+          alert(err.error.message+". Try again with different phone number or email address.");
         }
+      }
       );
       
       this.resetForm();

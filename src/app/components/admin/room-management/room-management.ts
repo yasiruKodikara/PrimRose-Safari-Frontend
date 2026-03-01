@@ -52,17 +52,23 @@ export class RoomManagementComponent {
       const index = this.rooms.findIndex(r => r.id === this.editingId);
       if (index !== -1) {
         this.rooms[index] = { ...this.newRoom, id: this.editingId };
-        this.api.updateRoomStatus(this.newRoom.id, this.newRoom.status).subscribe((res:any)=>{
+        this.api.updateRoom(this.newRoom.id, this.newRoom).subscribe((res:any)=>{
           alert(res.message);
+          this.api.getRooms().subscribe((data:any)=>{
+          this.rooms=data;
+      });
           
         });
       }
     } else {
       const newId = this.rooms.length > 0 ? Math.max(...this.rooms.map(r => r.id)) + 1 : 1;
       this.api.addRoom(this.newRoom).subscribe((res:any)=>{
-        alert(res.message[0]);
-        
+        alert(res.message);
+        this.api.getRooms().subscribe((data:any)=>{
+        this.rooms=data;
+    });
       });
+      
 
     }
 
@@ -78,8 +84,10 @@ export class RoomManagementComponent {
 
   deleteRoom(id: number) {
     this.api.deleteRoom(id).subscribe((res:any)=>{
-      alert(res.message[0]);
-      this.rooms = this.rooms.filter(r => r.id !== id);
+      alert(res.message);
+      this.api.getRooms().subscribe((data:any)=>{
+        this.rooms=data;
+    });
     });
   }
 

@@ -36,7 +36,7 @@
                 <p class="stat-label text-muted mb-0 small">Average Rating</p>
               </div> -->
               <div class="stat-item py-2">
-                <span class="stat-number text-info fw-bold">$2,450</span>
+                <span class="stat-number text-info fw-bold">{{totalAmount|currency:'USD'}}</span>
                 <p class="stat-label text-muted mb-0 small">Total Spent</p>
               </div>
             </div>
@@ -233,10 +233,10 @@
             <label for="email" class="form-label">Email Address</label>
             <input type="email" class="form-control" id="email" value="john.doe@example.com">
           </div>
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label for="phone" class="form-label">Phone Number</label>
             <input type="tel" class="form-control" id="phone" value="+1 (555) 123-4567">
-          </div>
+          </div> -->
           <div class="mb-3">
             <label for="address" class="form-label">Address</label>
             <input type="text" class="form-control" id="address" value="123 Main Street, City, State 12345">

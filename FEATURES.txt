@@ -1,0 +1,73 @@
+TravelX Frontend Features
+
+This document outlines the major features and capabilities of the TravelX web application.
+
+1. **Home Page**
+   - Landing page with general information and navigation to other sections.
+
+2. **User Authentication**
+   - Login functionality (`auth` component).
+   - Registration for new users (`register` component).
+   - Route guarding for authenticated areas (authGuard, adminGuard, customerGuard).
+
+3. **User Account Management**
+   - "My Account" section for authenticated users.
+   - Profile viewing and editing.
+   - Protected by auth guard and deactivate guard (prevent unsaved navigation).
+
+4. **Room Listings**
+   - Browse available rooms (`rooms` component).
+   - Bookings for rooms (client side, possibly via APIs).
+
+5. **Vehicle Listings**
+   - Browse available vehicles for rent (`vehicles` component).
+
+6. **Safari Tours**
+   - Browse safari options (`safaris` component).
+
+7. **Payment Processing**
+   - Customer payment processing component (likely integrated in booking flows).
+
+8. **Admin Dashboard**
+   - Accessible only by users with admin privileges.
+   - Features include:
+     - **Room Management**: add, update, delete rooms.
+     - **Vehicle Management**: add, update, delete vehicles.
+     - **Safari Management**: add, update, delete safari tours.
+     - **Booking Management**: view and modify bookings, set statuses.
+   - Routing structure includes nested admin routes for each management area.
+
+9. **Shared UI Components**
+   - Header component for navigation and branding.
+   - Footer component for consistent page layout.
+
+10. **Route Guards**
+    - `authGuard`: Protects routes requiring logged-in users.
+    - `adminGuard`: Restricts access to admin-only areas.
+    - `customerGuard`: Checks customer-specific privileges if needed.
+    - `DeactivateGuard`: Warns user when navigating away with unsaved changes.
+
+11. **API Services**
+    - Central `Api` service for communicating with backend endpoints.
+    - Methods for retrieving and manipulating rooms, vehicles, safaris, bookings, authentication, etc.
+
+12. **State Management**
+    - `AuthState` service for managing authentication state across components.
+
+13. **Interceptors**
+    - `AuthInterceptor` for attaching tokens to requests, handling unauthorized responses.
+
+14. **Models**
+    - Data models for entities like `Vehicle`, `Booking`, etc.
+
+15. **Testing Infrastructure**
+    - Spec files accompany most components and services (e.g., `.spec.ts` tests for guards, components, services).
+
+16. **Utilities**
+    - Common pipes (DatePipe, TitleCasePipe) used across components.
+
+17. **Styling**
+    - Each component has associated CSS for custom styling.
+
+
+_This feature list provides a high-level overview of the TravelX frontend site's capabilities as reflected in the current codebase._

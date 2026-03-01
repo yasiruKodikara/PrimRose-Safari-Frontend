@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthState } from '../../../core/services/auth-state';
 import { Api, Booking } from '../../../core/services/api';
 import { IDeactivateGuard } from '../../../core/guards/deactivate-guard';
-import { DatePipe, DecimalPipe, NgClass, NgFor, TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe, DecimalPipe, NgClass, NgFor, TitleCasePipe, UpperCasePipe } from '@angular/common';
 
 
 interface MyAccountProps {
@@ -42,7 +42,7 @@ interface MyAccountProps {
 
 @Component({
   selector: 'app-my-account',
-  imports: [NgFor,DatePipe,DecimalPipe,TitleCasePipe,UpperCasePipe,NgClass],
+  imports: [NgFor,DatePipe,DecimalPipe,CurrencyPipe,TitleCasePipe,UpperCasePipe,NgClass],
   templateUrl: './my-account.html',
   styleUrl: './my-account.css',
 })
@@ -58,6 +58,7 @@ export class MyAccount implements IDeactivateGuard, OnInit{
   userName:string ='';
   userRole:string ='';
   bookingCount:number = 0;
+  totalAmount:number = 0;
 
   canDeactivate(): boolean {
     return confirm('Are you sure you want to leave?');
@@ -126,7 +127,18 @@ export class MyAccount implements IDeactivateGuard, OnInit{
       error:(err)=>{
         console.log(err.message);
       }
-    })
+    });
+
+    this.api.getTotalAmountForUser(this.authState.currentUserValue?.id || 0).subscribe({
+      next:(res)=>{
+        this.totalAmount = res["total_amount"][0]["total_amount"];
+        console.log(this.totalAmount)
+      },
+      error:(err)=>{
+        console.log(err.message);
+      }
+    });
+
   }
 
   dashNav(){

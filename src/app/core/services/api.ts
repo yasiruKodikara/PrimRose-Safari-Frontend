@@ -127,6 +127,13 @@ export class Api {
     
     return this.http.patch(`${this.baseUrl}/rooms/update-room-status/${roomId}`, {status});
   }
+
+  //update room 
+   //Tested ✅
+  updateRoom(roomId:number, data:any):Observable<any>{
+    
+    return this.http.put(`${this.baseUrl}/rooms/update-room/${roomId}`, {data});
+  }
   
   //update vehicle status
   //Tested ✅
@@ -187,9 +194,14 @@ export class Api {
   }
   
   //UPDATE booking status
+  //Tested ✅
   setBookingStatus(bookingId: number,status:any):Observable<any> {
     return this.http.patch(`${this.baseUrl}/bookings/update-booking-status/${bookingId}`,status);
   }
   
+  //GET total_amount for user
+  getTotalAmountForUser(userId:number):Observable<any>{
+    return this.http.get(`${this.baseUrl}/bookings/get-total-amount-for-user/${userId}`);
+  }
 
 }
