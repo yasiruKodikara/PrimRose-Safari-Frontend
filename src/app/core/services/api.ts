@@ -34,7 +34,7 @@ export interface Booking {
 export class Api {
   
 
-  private baseUrl = `${environment.apiUrl}`;
+  private baseUrl = 'https://primrose-safari-backend-production.up.railway.app/api';
 
 
   constructor(private http:HttpClient){}
