@@ -13,14 +13,19 @@
 	transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 }
 .sign{
-	background: linear-gradient(135deg, #22c55e 0%, #04ff00 100%);
-	color:white;
+	background: linear-gradient(135deg, #22c55e00 0%, #04ff0000 100%);
+	color:rgb(255, 255, 255);
+	font-family: Kaushan Script;
+	border:2px solid white;
+	backdrop-filter: 10px;
+	box-shadow: black 1px 1px 5px;
+	text-shadow: black 1px 1px 10px;
 	
 }
 
 .navbar.scrolled {
 	background-color: #ffffff;   /* solid white */
-	backdrop-filter: blur(6px);  /* optional glass effect */
+	backdrop-filter: blur(3px);  /* optional glass effect */
 }
 
 .header-logo {
@@ -31,15 +36,18 @@
 }
 .brand-text {
 	font-weight: 700;
-	color: #00ff1a;
+	color: #FDFBF7;
 	font-size: 2.5rem;
-	font-family: Imperial Script;
+	font-family: Kaushan Script;
+	text-shadow: black 1px 1px 10px;
 }
 .navbar .nav-link {
 	gap: 20rem;
-	font-weight: bold;
-	font-size: 1.5rem;
-	color: #3dff02;
+	font-family: Kaushan Script;
+	/* font-weight: bold; */
+	font-size: 1.5rem; 
+	color: #ffffff;
+	text-shadow: black 1px 1px 10px;
 	
 }
 .navbar .nav-link.active {
