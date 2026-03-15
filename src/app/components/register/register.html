@@ -9,8 +9,10 @@
     <!-- Register: Name + Email + Password -->
     <div class="auth-form-wrapper">
       <form #registerForm="ngForm" (ngSubmit)="submitRegister()" class="auth-form">
+        
         <!-- Name Field -->
         <div class="mb-3">
+          
           <label for="name" class="form-label">Full Name</label>
           <input
             type="text"
@@ -90,6 +92,27 @@
           <div class="invalid-feedback d-block" *ngIf="isSubmitted && passField.invalid">
             <span *ngIf="passField.errors?.['required']">Password is required</span>
             <span *ngIf="passField.errors?.['minlength']">Password must be at least 6 characters</span>
+          </div>
+        </div>
+
+        <!-- OTP Field -->
+        <div class="mb-3">
+          <label for="otp" class="form-label">OTP</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="otp"
+            name="otp"
+            placeholder="012345"
+            [(ngModel)]="otp"
+            required
+            
+            #otpField="ngModel"
+            [class.is-invalid]="isSubmitted && otpField.invalid"
+          />
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && otpField.invalid">
+            <span *ngIf="otpField.errors?.['required']">OTP number is required</span>
+            <span *ngIf="otpField.errors?.['pattern']">Please enter the correct OTP (6 digits)</span>
           </div>
         </div>
 

@@ -5,20 +5,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  background-image: url('https://wallpaperaccess.com/full/3558148.jpg');
+  
   padding: 20px;
   position: relative;
   overflow: hidden;
 }
 
 .auth-card {
-  background: #fff;
+  background: #ffffff15;
   border-radius: 16px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   padding: 40px;
   max-width: 420px;
   width: 100%;
   z-index: 10;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px); 
 }
 
 /* Header Styles */
@@ -30,7 +34,7 @@
 .auth-title {
   font-size: 28px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #ffffff;
   margin-bottom: 8px;
 }
 

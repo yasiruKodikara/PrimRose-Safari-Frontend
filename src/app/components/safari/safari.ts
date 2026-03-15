@@ -49,12 +49,12 @@ export class Safari {
         const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
         this.api.bookSafari(bookingData).subscribe({
           next:(res:any)=>{
-          console.log(res.message);
-          alert(res.message);
+          console.log(res.error.message);
+          alert(res.error.message);
         },
           error:(error)=>{
             console.error(error);
-            alert(error.message);
+            alert(error.error.message);
           }
       })
         modal.hide();

@@ -28,7 +28,7 @@
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <label class="form-label">Price Per Day ($)</label>
+          <label class="form-label">Price Per Day (LKR)</label>
           <input type="number" name="price_per_day" class="form-control" [(ngModel)]="newVehicle.price_per_day" required min="0" #priceField="ngModel" [class.is-invalid]="isSubmitted && priceField.invalid" />
           <div class="invalid-feedback d-block" *ngIf="isSubmitted && priceField.invalid">Valid price is required</div>
         </div>
@@ -63,7 +63,7 @@
         <tr>
           <th>Model</th>
           <th>Type</th>
-          <th>Price/Day</th>
+          <th>Price/Day (LKR)</th>
           <th>Status</th>
           <th>Actions</th>
         </tr>
@@ -72,7 +72,7 @@
         <tr *ngFor="let vehicle of vehicles">
           <td>{{ vehicle.model }}</td>
           <td>{{ vehicle.type }}</td>
-          <td>${{ vehicle.price_per_day }}</td>
+          <td>{{ vehicle.price_per_day }}</td>
           <td><span [ngClass]="vehicle.status === 'available' ? 'badge bg-success' : 'badge bg-danger'">{{ vehicle.status }}</span></td>
           <td>
             <button class="btn btn-sm btn-primary me-2" (click)="editVehicle(vehicle)">Edit</button>

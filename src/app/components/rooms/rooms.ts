@@ -51,9 +51,11 @@ export class Rooms {
 
       this.api.bookRoom(bookingData).subscribe(response => {
         console.log('Booking successful:', response);
+        alert(response.message);
         this.isBooked = true;
       }, error => {
-        alert(error.message);
+        alert(error.error.message);
+        
         console.error('Booking failed:', error);
       });
 

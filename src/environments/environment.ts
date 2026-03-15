@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://primrose-safari-backend-production.up.railway.app/api' // Your future Railway URL
+  apiUrl: 'http://localhost:4200/api' // Your future Railway URL
 };
+//https://primrose-safari-backend-production.up.railway.app/api

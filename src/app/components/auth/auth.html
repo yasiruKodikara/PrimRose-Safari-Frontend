@@ -9,24 +9,24 @@
     <!-- Login: Phone + Password -->
     <div class="auth-form-wrapper">
       <form #loginForm="ngForm" (ngSubmit)="submitLogin()" class="auth-form">
+        <!-- Email Field -->
         <div class="mb-3">
-          <label for="phoneNumber" class="form-label">Phone Number</label>
+          <label for="email" class="form-label">Email Address</label>
           <input
-            type="tel"
+            type="email"
             class="form-control form-control-lg"
-            id="phoneNumber"
-            name="phoneNumber"
-            placeholder="+94712345678"
-            [(ngModel)]="phoneNumber"
-            maxlength="12"
+            id="email"
+            name="email"
+            placeholder="john@example.com"
+            [(ngModel)]="email"
             required
-            pattern="[0-9\s\-\+\(\)]{10,15}"
-            #phoneField="ngModel"
-            [class.is-invalid]="isSubmitted && phoneField.invalid"
+            email
+            #emailField="ngModel"
+            [class.is-invalid]="isSubmitted && emailField.invalid"
           />
-          <div class="invalid-feedback d-block" *ngIf="isSubmitted && phoneField.invalid">
-            <span *ngIf="phoneField.errors?.['required']">Phone number is required</span>
-            <span *ngIf="phoneField.errors?.['pattern']">Please enter a valid phone number (10-15 digits)</span>
+          <div class="invalid-feedback d-block" *ngIf="isSubmitted && emailField.invalid">
+            <span *ngIf="emailField.errors?.['required']">Email is required</span>
+            <span *ngIf="emailField.errors?.['email']">Please enter a valid email address</span>
           </div>
         </div>
 
@@ -58,8 +58,8 @@
           Sign In
         </button>
 
-        <p class="auth-footer-text">
-          New to PrimRose? <a [routerLink]="['/register']" class="text-primary fw-bold">Create an account</a>
+        <p class="auth-footer-text text-dark">
+          New to PrimRose? <a [routerLink]="['/email-register']" class="text-primary fw-bold">Create an account</a>
         </p>
       </form>
     </div>

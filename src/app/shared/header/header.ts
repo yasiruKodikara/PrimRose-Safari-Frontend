@@ -13,7 +13,12 @@ export class Header {
 
   constructor(private authState:AuthState){}
   
-  
+  isMenuOpen: boolean = false;
+
+  // Optional: A function to close the menu when a link is clicked
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
   isLoggedIn():boolean{
     // This is a great place to check if the user is already logged in when the app starts.
     // If they are, we can set our AuthState accordingly so the rest of the app knows about it.

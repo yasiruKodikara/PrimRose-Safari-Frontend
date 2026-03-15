@@ -2,7 +2,9 @@
 .footer a { color: rgba(255,255,255,0.9); }
 .footer h5, .footer h6 { color: #fff; }
 .footer .social .btn { border-radius: 6px; }
-
+.developer a{
+    text-decoration: none;
+}
 .developer-tag {
   text-align: center;
   width: 100%;

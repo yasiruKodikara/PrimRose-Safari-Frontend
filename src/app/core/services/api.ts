@@ -34,7 +34,7 @@ export interface Booking {
 export class Api {
   
 
-  private baseUrl = 'https://primrose-safari-backend-production.up.railway.app/api';
+  private baseUrl = 'http://localhost:8080/api'; //https://primrose-safari-backend-production.up.railway.app/api
 
 
   constructor(private http:HttpClient){}
@@ -54,14 +54,14 @@ export class Api {
   }
 
   //Tested✅
-  registerUser(userData: {name:string, email:string, password:string, phone:string}):Observable<any>{
+  registerUser(userData: {name:string, email:string, password:string, phone:string, otp:string}):Observable<any>{
     
     return this.http.post(`${this.baseUrl}/auth/register`, userData);
 
   }
 
   //Tested✅
-  login(loginData: {phone:string, password:string}):Observable<any>{
+  login(loginData: {email:string, password:string}):Observable<any>{
     
     return this.http.post(`${this.baseUrl}/auth/login`, loginData);
   }
@@ -203,6 +203,11 @@ export class Api {
   //GET total_amount for user
   getTotalAmountForUser(userId:number):Observable<any>{
     return this.http.get(`${this.baseUrl}/bookings/get-total-amount-for-user/${userId}`);
+  }
+
+  //request OTP
+  requestOTP(email:any):Observable<any>{
+    return this.http.post(`${this.baseUrl}/auth/send-otp`,email);
   }
 
 }

@@ -17,6 +17,7 @@ export class Register {
   email: string = '';
   password: string = '';
   phone: string = '';
+  otp:string = '';
   isSubmitted: boolean = false;
 
   constructor(private api:Api, private router:Router){}
@@ -28,11 +29,12 @@ export class Register {
       this.isValidName(this.name) &&
       this.isValidEmail(this.email) &&
       this.isValidPassword(this.password) &&
+      this.isValidOTP(this.otp) &&
       this.isValidPhone(this.phone)
     ) {
-      console.log('Registering user:', { name: this.name, email: this.email, phone: this.phone });
+      console.log('Registering user:', { name: this.name, email: this.email, phone: this.phone, otp:this.otp});
       // TODO: Call API to register user
-      this.api.registerUser({name:this.name, email:this.email, password:this.password, phone:this.phone}).subscribe({
+      this.api.registerUser({name:this.name, email:this.email, password:this.password, phone:this.phone, otp:this.otp}).subscribe({
         next:(res:any)=>{
           alert(res.message);
           this.router.navigate(['/my-account']);
@@ -69,12 +71,18 @@ export class Register {
     return clean.length >= 10 && clean.length <= 15;
   }
 
+  // Validation: Password (min 6 chars)
+  isValidOTP(otp: string): boolean {
+    return typeof otp === 'string';
+  }
+
   // Reset form
   resetForm() {
     this.name = '';
     this.email = '';
     this.password = '';
     this.phone = '';
+    this.otp = '';
     this.isSubmitted = false;
   }
 }

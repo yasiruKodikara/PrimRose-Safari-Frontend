@@ -52,7 +52,7 @@
     <div class="sectionthree">
       <h1 style="font-family: Kaushan Script;text-shadow: black 1px 1px 5px; display: flex; justify-content: right; font-size: 4rem; color: rgb(36, 36, 36); margin-right: 6rem;">Gallery</h1>
 
-      <div class="gallery animated-gallery" [class.expanded]="isExpanded">
+      <div class="gallery animated-gallery" id="gallery" [class.expanded]="isExpanded">
         <img *ngFor="let img of images" [src]="img" alt="Gallery image"/>
       </div>
 

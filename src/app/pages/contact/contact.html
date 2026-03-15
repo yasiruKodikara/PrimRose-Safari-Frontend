@@ -1,0 +1,76 @@
+<main class="contact-main">
+  <section class="hero-section">
+    <div class="container text-center text-white">
+      <h1 class="display-4 fw-bold">Contact Us</h1>
+      <p class="lead">Get in touch with us for your travel needs</p>
+    </div>
+  </section>
+
+  <section class="contact-section py-5">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-6">
+          <h2 class="mb-4">Get In Touch</h2>
+          <p class="mb-4">Have questions about our services? Want to book a safari, rent a vehicle, or reserve a room? We're here to help!</p>
+
+          <div class="contact-info mb-4">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-envelope-fill me-3 fs-4"></i>
+              <div>
+                <strong>Email</strong><br>
+                support@primrose.example
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-telephone-fill me-3 fs-4"></i>
+              <div>
+                <strong>Phone</strong><br>
+                +1 (555) 123-4567
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-geo-alt-fill me-3 fs-4"></i>
+              <div>
+                <strong>Address</strong><br>
+                Udawalawa, Sri Lanka
+              </div>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <h5>Follow Us</h5>
+            
+            <a href="https://wa.me/+94762628263" class="btn btn-outline-primary me-2 mb-2">WhatsApp</a>
+            <a href="#" class="btn btn-outline-primary me-2 mb-2">Facebook</a>
+            <a href="#" class="btn btn-outline-primary mb-2">Instagram</a>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="contact-form bg-light p-4 rounded shadow-sm">
+            <h3 class="mb-4">Send us a Message</h3>
+            <form (ngSubmit)="onSubmit()" #contactFormRef="ngForm">
+              <div class="mb-3">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="contactForm.name" name="name" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" [(ngModel)]="contactForm.email" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="subject" [(ngModel)]="contactForm.subject" name="subject" required>
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="5" [(ngModel)]="contactForm.message" name="message" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary w-100" [disabled]="!contactFormRef.valid">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

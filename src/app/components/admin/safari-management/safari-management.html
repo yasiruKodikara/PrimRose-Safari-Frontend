@@ -15,7 +15,7 @@
         </div>
 
         <div class="col-md-6 mb-3">
-          <label class="form-label">Price Per Trip ($)</label>
+          <label class="form-label">Price Per Trip (LKR)</label>
           <input type="number" name="price_per_trip" class="form-control" [(ngModel)]="newSafari.price_per_trip" required min="0" #priceField="ngModel" [class.is-invalid]="isSubmitted && priceField.invalid" />
           <div class="invalid-feedback d-block" *ngIf="isSubmitted && priceField.invalid">Valid price is required</div>
         </div>
@@ -66,7 +66,7 @@
       <thead class="table-light">
         <tr>
           <th>Name</th>
-          <th>Price/Trip</th>
+          <th>Price/Trip(LKR)</th>
           <th>Max Passengers</th>
           <th>Driver Included</th>
           <th>Status</th>
@@ -76,7 +76,7 @@
       <tbody>
         <tr *ngFor="let safari of safaris">
           <td>{{ safari.name }}</td>
-          <td>${{ safari.price_per_trip }}</td>
+          <td>{{ safari.price_per_trip }}</td>
           <td>{{ safari.max_passengers }}</td>
           <td>
             <span class="badge" [ngClass]="safari.driver_included ? 'bg-success' : 'bg-warning'">

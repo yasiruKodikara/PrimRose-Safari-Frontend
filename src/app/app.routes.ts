@@ -7,9 +7,11 @@ export const routes: Routes = [
     {path: 'home', loadComponent: () => import('./home/home/home').then(m => m.Home)},
     {path: 'auth', loadComponent: () => import('./components/auth/auth').then(m => m.Auth)},
     {path: 'register', loadComponent: () => import('./components/register/register').then(m => m.Register)},
+    {path: 'email-register', loadComponent: () => import('./components/auth/email-register/email-register/email-register').then(m => m.EmailRegister)},
     {path: 'rooms', loadComponent: () => import('./components/rooms/rooms').then(m => m.Rooms)},
     {path: 'vehicles', loadComponent: () => import('./components/vehicles/vehicles').then(m => m.Vehicles)},
     {path: 'safaris', loadComponent: () => import('./components/safari/safari').then(m => m.Safari)},
+    {path: 'contact', loadComponent: () => import('./pages/contact/contact').then(m => m.Contact)},
     {
         path: 'my-account', loadComponent: () => import('./components/customer/my-account/my-account').then(m => m.MyAccount),
         canActivate:[authGuard],canDeactivate:[DeactivateGuard]

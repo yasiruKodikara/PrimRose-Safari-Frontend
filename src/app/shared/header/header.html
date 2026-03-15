@@ -4,10 +4,10 @@
 			<!-- <img src="/assets/logo.png" alt="PrimRose" class="me-2 header-logo" onerror="this.src='https://via.placeholder.com/40'"/> -->
 			<span class="brand-text">PrimRose</span>
 		</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+		<button class="navbar-toggler" type="button"  (click)="isMenuOpen = !isMenuOpen" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="mainNavbar">
+		<div class="collapse navbar-collapse smooth-collapse" id="mainNavbar" [class.show]="isMenuOpen">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item"><a class="nav-link" [routerLink]="['/gallery']">Gallery</a></li>
 				<li class="nav-item"><a class="nav-link" [routerLink]="['/about']">About</a></li>
@@ -18,7 +18,7 @@
 				
 				<a class="nav-link" (click)="myAccount()" [class.d-none]="!isLoggedIn()"><i class="bi bi-person-circle">🦁</i>My Account</a>
 				<a class="btn btn-outline-success me-2 sign" [class.d-none]="isLoggedIn()" [routerLink]="['/auth']">Sign In</a>
-				<a class="btn btn-outline-success me-2 sign" [class.d-none]="isLoggedIn()"  [routerLink]="['/register']">Register</a>
+				<a class="btn btn-outline-success me-2 sign" [class.d-none]="isLoggedIn()"  [routerLink]="['/email-register']">Register</a>
 			</div>
 		</div>
 	</div>

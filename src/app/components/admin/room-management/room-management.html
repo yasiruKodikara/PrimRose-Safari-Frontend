@@ -28,7 +28,7 @@
 
       <div class="row">
         <div class="col-md-6 mb-3">
-          <label class="form-label">Price Per Night ($)</label>
+          <label class="form-label">Price Per Night (LKR)</label>
           <input type="number" name="price_per_night" class="form-control" [(ngModel)]="newRoom.price_per_night" required min="0" #priceField="ngModel" [class.is-invalid]="isSubmitted && priceField.invalid" />
           <div class="invalid-feedback d-block" *ngIf="isSubmitted && priceField.invalid">Valid price is required</div>
         </div>
@@ -71,7 +71,7 @@
         <tr>
           <th>Room Number</th>
           <th>Type</th>
-          <th>Price/Night</th>
+          <th>Price/Night (LKR)</th>
           <th>Capacity</th>
           <th>Status</th>
           <th>Actions</th>
@@ -81,7 +81,7 @@
         <tr *ngFor="let room of rooms">
           <td>{{ room.room_number }}</td>
           <td>{{ room.type }}</td>
-          <td>${{ room.price_per_night }}</td>
+          <td>{{ room.price_per_night }}</td>
           <td>{{ room.capacity }} {{ room.capacity === 1 ? 'Guest' : 'Guests' }}</td>
           <td><span [ngClass]="room.status === 'available' ? 'badge bg-success' : 'badge bg-danger'">{{ room.status }}</span></td>
           <td>

@@ -13,7 +13,7 @@ import { AuthState } from '../../core/services/auth-state';
   styleUrl: './auth.css'
 })
 export class Auth {
-  phoneNumber: string = '';
+  email: string = '';
   password: string = '';
   isSubmitted: boolean = false;
 
@@ -23,10 +23,10 @@ export class Auth {
   // Submit login with phone and password
   submitLogin() {
     this.isSubmitted = true;
-    if (this.isValidPhone(this.phoneNumber) && this.isValidPassword(this.password)) {
-      console.log('Logging in with:', this.phoneNumber);
+    if (this.isValidEmail(this.email) && this.isValidPassword(this.password)) {
+      console.log('Logging in with:', this.email);
 
-      this.api.login({phone: this.phoneNumber, password:this.password}).subscribe({
+      this.api.login({email: this.email, password:this.password}).subscribe({
         next: (res:any) =>{
           // 1. The browser automatically saves the httpOnly cookie securely.
           
@@ -47,10 +47,10 @@ export class Auth {
     }
   }
 
-  // Validation: Phone number (10-15 digits, international)
-  isValidPhone(phone: string): boolean {
-    const cleanPhone = phone.replace(/\D/g, '');
-    return cleanPhone.length >= 10 && cleanPhone.length <= 15;
+  // Validation: Email format
+  isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 
   // Validation: Password (min 6 chars)
